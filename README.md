@@ -21,7 +21,7 @@ To use this library in your project, add it as a Git dependency in your `Cargo.t
 
 ```toml
 [dependencies]
-obsidian-zip = { git = "https://github.com/Obsidian-Minecraft-Server-Portal/zip.git", branch = "main" }
+obsidian-zip = { git = "https://github.com/Obsidian-Minecraft-Server-Portal/zip.git" }
 ```
 
 ## Usage
@@ -35,20 +35,21 @@ use obsidian_zip::archive_directory;
 use std::path::Path;
 
 fn main() -> Result<(), obsidian_zip::ArchiveError> {
-    // Paths to the target directory and the output file.
-    let directory = Path::new("/path/to/directory");
-    let output_file = Path::new("/path/to/output.zip");
+	// Paths to the target directory and the output file.
+	let directory = Path::new("/path/to/directory");
+	let output_file = Path::new("/path/to/output.zip");
 
-    // Apply a filter to exclude specific files (e.g., temporary files).
-    archive_directory(directory, output_file, &|path| {
-        !path.extension().map_or(false, |ext| ext == "tmp")
-    })?;
+	// Apply a filter to exclude specific files (e.g., temporary files).
+	archive_directory(directory, output_file, &|path| {
+		!path.extension().map_or(false, |ext| ext == "tmp")
+	})?;
 
-    Ok(())
+	Ok(())
 }
 ```
 
 In this example:
+
 - Replace `/path/to/directory` with the path to the directory you want to zip.
 - Replace `/path/to/output.zip` with the desired output file name.
 - The filter excludes files with a `.tmp` extension.
@@ -56,6 +57,7 @@ In this example:
 ### Error Handling
 
 The library uses a custom error type, `ArchiveError`, to capture and propagate errors throughout the operations, such as:
+
 - I/O errors
 - Zip creation errors
 - Directory traversal errors
@@ -63,6 +65,7 @@ The library uses a custom error type, `ArchiveError`, to capture and propagate e
 ## Features Used
 
 This library uses the following dependencies:
+
 - **[walkdir](https://docs.rs/walkdir)**: For recursive directory traversal.
 - **[zip](https://docs.rs/zip)**: For handling zip files and compression.
 - **[rayon](https://docs.rs/rayon)**: For parallel file processing to speed up file reading.
